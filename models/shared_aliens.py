@@ -37,6 +37,10 @@ def update_Qs_sim(season, alien,
                   model_name, action=[], verbose=False):
 
     # Select TS
+    
+    ### At each trial, the agent must select one TS to begin with. The first trial will use the high level Q values that are initialized as the expected value ###
+    ### of each TS. And the following trials will use the Q from last trial's update. Send these Q values into a softmax function to select a TS. These Q vals ###
+    ### for the current selected TS (hier RL; for Bayes RL, it'll be all TSs) will get updated after evaluating the action value of the current trial. ###
     Q_high_sub = Q_high[np.arange(n_subj), season]  # Q_high_sub.shape -> (n_subj, n_TS)
     p_high = softmax(beta_high * Q_high_sub, axis=1)   # p_high.shape -> (n_subj, n_TS)
     if model_name == 'flat':
@@ -49,8 +53,13 @@ def update_Qs_sim(season, alien,
         TS = np.array([np.random.choice(a=n_TS, p=p_high_subj) for p_high_subj in p_high])
 
     # Select action
+    
+    ### At each trial, the agent must select one action. The first trial will use the low level Q values that are initialized as the expected value ###
+    ### of each action. And the following trials will use the Q from last trial's update. Send these Q values into a softmax function to select an action. ###
     Q_low_sub = Q_low[np.arange(n_subj), TS, alien]  # Q_low_sub.shape -> [n_subj, n_actions]
     p_low = softmax(beta * Q_low_sub, axis=1)
+    
+    ### Look at the actual reward you got based on the selected action by calling task.produce_reward(action). ###
     if len(action) == 0:  # action can be provided as participant-chosen actions when calculating human values
         action = np.array([np.random.choice(a=n_actions, p=p_low_subj) for p_low_subj in p_low])
     reward, correct = task.produce_reward(action)
@@ -60,14 +69,21 @@ def update_Qs_sim(season, alien,
     Q_high = (1 - forget_high) * Q_high + forget_high * alien_initial_Q
 
     # Update low-level Q-values
-    current_trial_low = np.arange(n_subj), TS, alien, action
-    if model_name == 'Bayes':
+    ### Now, after getting the actual reward from the current action selection and updating the Q value for the current action with forgetting param ###
+    ### we can further update Q value for the current action with RPE, learning rate (alpha) and stochastic param (beta). ###
+    current_trial_low = np.arange(n_subj), TS, alien, action # Find the current Q_low (action value) after the "forgetting" updates for the next update.
+    if model_name == 'Bayes': #Bayes tests reliability
         RPE_low = correct - Q_low[current_trial_low]
     else:
         RPE_low = reward - Q_low[current_trial_low]
+    
+    ### After calculating RPE, we can use the learning rate alpha to update the current action value Q_low. ###
     Q_low[current_trial_low] += alpha * RPE_low
 
+    
     # Update high-level Q-values
+    
+    ### After updating the current action value, we can update the high level Q values (Q_high). ###
     current_trial_high = np.arange(n_subj), season, TS
     if model_name == 'Bayes':  # update all TS
         p_r_given_TS_s_a = Q_low.transpose([0, 2, 3, 1])[np.arange(n_subj), alien, action]
