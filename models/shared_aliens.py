@@ -85,11 +85,11 @@ def update_Qs_sim(season, alien,
     
     ### After updating the current action value, we can update the high level Q values (Q_high). ###
     current_trial_high = np.arange(n_subj), season, TS
-    if model_name == 'Bayes':  # update all TS
-        p_r_given_TS_s_a = Q_low.transpose([0, 2, 3, 1])[np.arange(n_subj), alien, action]
+    if model_name == 'Bayes':  # update all TS; paper line 604-609
+        p_r_given_TS_s_a = Q_low.transpose([0, 2, 3, 1])[np.arange(n_subj), alien, action] #[=Q(a|TS,s)]
         Q_high[np.arange(n_subj), season] *= p_r_given_TS_s_a  # P(TS|C) *= P(r|TS,s,a) [=Q(a|TS,s)]
-        Q_high[np.arange(n_subj), season] /= np.sum(Q_high[np.arange(n_subj), season], axis=1, keepdims=True)
-    else:
+        Q_high[np.arange(n_subj), season] /= np.sum(Q_high[np.arange(n_subj), season], axis=1, keepdims=True) #summing up all TS vals in a given context.
+    else: #update only the current TS
         RPE_high = reward - Q_high[current_trial_high]
         Q_high[current_trial_high] += alpha_high * RPE_high
 
