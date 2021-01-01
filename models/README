@@ -1,7 +1,20 @@
+The 3 RL models were created based on: [insert euqation here]
+
+
 In these files,
 
 1. AlienTask.py reads in files from all subjects and get info about trial stimulus (which alien was presented), optimal TS in the current context,
 current context (season), phase (initial learning, cloudy, preference, novel, mixed).
 
-2. shared_aliens.py builds up the models ("flat", "hier RL", "Bayes hier RL") and specifies the model parameters
-* fhh
+2. shared_aliens.py builds up the models ("flat", "hier RL", "Bayes hier RL") and specifies the model parameters (alpha learning rate, beta stochastic rate, f forgetting).
+It also contains the functions for simulating different phases.
+
+3. SimulateAliensJupyterVersionFunctions.py actually runs the simulation for each phase and get summary.
+
+4. SimulateAliensJupyterVersionBeforeSplittingUp.ipynb partially the same with above but plotting out results.
+
+5. SimulateAliensJupyterVersionPart1SIMULATIONS.ipynb is the first part of the above script, generating all simulations.
+
+6. SimulateAliensJupyterVersionPart2ANALYZEALLSIMULATIONS.ipynb is the second part of 4, analyzing all simulations.
+
+7. SimulateAliensJupyterVersionPart3ANALYZESELECTEDSIMULATIONS.ipynb is the second part of 4, executing selected analyses in the supp material.
