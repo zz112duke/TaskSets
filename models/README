@@ -1,0 +1,6 @@
+In these files,
+
+1. AlienTask.py reads in files from all subjects and get info about trial stimulus (which alien was presented), optimal TS in the current context,
+current context (season), phase (initial learning, cloudy, preference, novel, mixed).
+
+2.
