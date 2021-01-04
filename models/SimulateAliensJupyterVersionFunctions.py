@@ -93,7 +93,10 @@ s, a = np.array([0, 1, 2]), np.array([0, 0, 0])
 s, a = [0, 1, 2], [0, 0, 0]
 # get_action_values(s, a, task.TS), get_TS_values(s, task.TS)
 
-
+## This model takes the VALUE of action and TS as the two predictive variables. Even though the hier RL model outputs the final choice of action and TS ##
+## instaed of their values, we can use the func get_action_values and get_TS_values to get the trial-by-trial action and TS values. For model simulations ##
+## these values are then used as the regression inputs. For human data, where do the action and TS values come from though?
+## For model simulations, we can just 
 def run_regr_models(seasons, corrects, aliens, actions, trials, TS, regr_phases=['1InitialLearn', '2CloudySeason']):
     """
     Run the regression correct ~ action_value + TS_value, separately for each participant
