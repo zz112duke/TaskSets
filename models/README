@@ -10,7 +10,11 @@ model simulation.
 2. shared_aliens.py builds up the skeleton of the models ("flat", "hier RL", "Bayes hier RL") and specifies the model parameters (alpha learning rate, beta stochastic rate, f forgetting).
 It also contains the functions for simulating different phases.
 
-3. SimulateAliensJupyterVersionFunctions.py actually runs the simulation (call function update_Qs_sim()) for each phase and get summary (call function summary_initial_learn(), etc.).
+3. SimulateAliensJupyterVersionFunctions.py actually runs the simulation: call function update_Qs_sim() for initial learning and cloudy phase and simulate_rainbow_phase()
+abd simulate_competition_phase() for rainbow and competition phase simulation. And get model summary: call get_summary_initial_learn() and get_summary_cloudy().
+Note that even though the func get_summary() is called get_summary, the simulation actually happens inside there.
+
+(call function summary_initial_learn(), etc.).
 
 4. SimulateAliensJupyterVersionBeforeSplittingUp.ipynb partially the same with above but plotting out results.
 
