@@ -12,9 +12,8 @@ It also contains the functions for simulating different phases.
 
 3. SimulateAliensJupyterVersionFunctions.py actually runs the simulation: call function update_Qs_sim() for initial learning and cloudy phase and simulate_rainbow_phase()
 abd simulate_competition_phase() for rainbow and competition phase simulation. And get model summary: call get_summary_initial_learn() and get_summary_cloudy().
+Run and get summaries for rainbow season and competition are done within the get_summary() function.
 Note that even though the func get_summary() is called get_summary, the simulation actually happens inside there.
-
-(call function summary_initial_learn(), etc.).
 
 4. SimulateAliensJupyterVersionBeforeSplittingUp.ipynb partially the same with above but plotting out results.
 
