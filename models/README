@@ -7,10 +7,10 @@ In these files,
 current context (season), phase (initial learning, cloudy, preference, novel, mixed). The func produce_reward() is probably used to gernerate reward in
 model simulation.
 
-2. shared_aliens.py builds up the models ("flat", "hier RL", "Bayes hier RL") and specifies the model parameters (alpha learning rate, beta stochastic rate, f forgetting).
+2. shared_aliens.py builds up the skeleton of the models ("flat", "hier RL", "Bayes hier RL") and specifies the model parameters (alpha learning rate, beta stochastic rate, f forgetting).
 It also contains the functions for simulating different phases.
 
-3. SimulateAliensJupyterVersionFunctions.py actually runs the simulation for each phase and get summary.
+3. SimulateAliensJupyterVersionFunctions.py actually runs the simulation (call function update_Qs_sim()) for each phase and get summary (call function summary_initial_learn(), etc.).
 
 4. SimulateAliensJupyterVersionBeforeSplittingUp.ipynb partially the same with above but plotting out results.
 
