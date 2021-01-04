@@ -4,7 +4,8 @@ The 3 RL models were created based on: [insert euqation here]
 In these files,
 
 1. AlienTask.py reads in files from all subjects and get info about trial stimulus (which alien was presented), optimal TS in the current context,
-current context (season), phase (initial learning, cloudy, preference, novel, mixed).
+current context (season), phase (initial learning, cloudy, preference, novel, mixed). The func produce_reward() is probably used to gernerate reward in
+model simulation.
 
 2. shared_aliens.py builds up the models ("flat", "hier RL", "Bayes hier RL") and specifies the model parameters (alpha learning rate, beta stochastic rate, f forgetting).
 It also contains the functions for simulating different phases.
