@@ -198,6 +198,7 @@ def get_summary(task, model_name, parameters, param_ranges,
     Q_high = alien_initial_Q * np.ones([n_sim, n_seasons, n_TS])
 
     ## Simulate behavior
+    ## This is where model simulation happens. ##
     for trial in trials['1InitialLearn']:
         ### Observe stimuli
         season, alien = task.present_stimulus(trial)
