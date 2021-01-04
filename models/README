@@ -8,12 +8,18 @@ current context (season), phase (initial learning, cloudy, preference, novel, mi
 model simulation.
 
 2. shared_aliens.py builds up the skeleton of the models ("flat", "hier RL", "Bayes hier RL") and specifies the model parameters (alpha learning rate, beta stochastic rate, f forgetting).
-It also contains the functions for simulating different phases.
+It also contains the functions (the skeletons) for simulating different phases.
 
-3. SimulateAliensJupyterVersionFunctions.py actually runs the simulation: call function update_Qs_sim() for initial learning and cloudy phase and simulate_rainbow_phase()
-abd simulate_competition_phase() for rainbow and competition phase simulation. And get model summary: call get_summary_initial_learn() and get_summary_cloudy().
-Run and get summaries for rainbow season and competition are done within the get_summary() function.
-Note that even though the func get_summary() is called get_summary, the simulation actually happens inside there.
+3. SimulateAliensJupyterVersionFunctions.py actually 
+  A. RUNs the simulation: i)call function update_Qs_sim() for initial learning and cloudy phase (simulating initial learning and cloudy phase
+  doesn't require a compressed function from shared_aliens.py, unlike rainbow and comp that has a function for everything) and ii)simulate_rainbow_phase()
+  and simulate_competition_phase() for rainbow and competition phase simulation. 
+  B. And get model summary: i)call get_summary_initial_learn() and get_summary_cloudy(). ii)get summaries for rainbow season and competition are done within the get_summary() function 
+  because getting summaries for these two phases doesn't require any function, it's relatively straight-forward.
+  
+  # So for initial and cloudy, simulation by steps without shared_aliens.py functions, but require shared_aliens.py function for model summary;
+  # Whereas for rainbow and comp, simulation reuqires shared_aliens.py functions but getting summary is easy.
+  # Note that even though the func get_summary() is called get_summary, the simulation actually happens inside there.
 
 4. SimulateAliensJupyterVersionBeforeSplittingUp.ipynb partially the same with above but plotting out results.
 
